@@ -1,0 +1,44 @@
+{% extends "basic\basic.html" %}
+
+
+{% block title %}
+Inventory Dashboard
+{% endblock title %}
+
+
+{% load static %}
+{% block style %}
+
+{% endblock style %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 flex justify-center items-center">
+            <h1 class="text-2xl font-bold text-center">Inventry Management</h1>
+        </div>
+        <div class="col-12">
+            <div class="flex justify-center items-center mb-3">
+                {% include "widgets/cards/inventory_overview_card.html" with header="Overview"%}
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-2">
+                {% include "widgets/cards/nav_card.html" with header="Manage Products Details" sub='Create, delete, and update Products effortlessly.'  url='inventory_manage'%}
+        </div>
+
+        <div class="col-12 col-md-6 mb-2">
+                {% include "widgets/cards/nav_card.html" with header="Suppliers Manage" sub='Create, delete, and update Suppliers ' url='supplier_manage'%}
+        </div>
+        <div class="col-12 col-md-6 mb-2">
+            {% include "widgets/cards/nav_card.html" with header="Stock Manage" sub='Create, delete, and update Stock ' url='stock_manage'%}
+        </div>
+    </div>
+</div>
+{% include 'widgets/delete_confirmation_modal.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/delete_confirmation_modal.js' %}"></script>
+{% endblock scripts %}

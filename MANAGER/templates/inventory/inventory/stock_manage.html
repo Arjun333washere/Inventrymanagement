@@ -1,0 +1,32 @@
+{% extends "basic/basic.html" %}
+{% block title %} Stock Management {% endblock title %}
+{% load static %}
+{% block style %} {% endblock style %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-center">
+            <h1 class="text-2xl font-bold text-center">Stock Management</h1>
+        </div>
+    </div>
+
+    <div class="row mb-4 justify-content-end">
+        <div class="col-auto">
+            <a href="{% url 'stock_create' %}" class="btn btn-primary">Add New Stock</a>
+        </div>
+    </div>
+
+    <!-- Search Input -->
+
+    <div class="row" id="fees-list">
+        {% include 'widgets/cards/stock_card.html' with libraries=libraries %}
+    </div>
+</div>
+
+{% include 'widgets/delete_confirmation_modal.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/delete_confirmation_modal.js' %}"></script>
+
+{% endblock %}

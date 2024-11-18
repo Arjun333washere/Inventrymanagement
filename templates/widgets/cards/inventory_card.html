@@ -1,0 +1,47 @@
+{% if products %}
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card border-dark h-100 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div class="product-details">
+                        <h5 class="card-title mb-1">{{ product.name }}</h5>
+
+                        <small class="text-muted d-block mb-2">Price: ${{ product.price }}</small>
+                        <p class="mb-1">
+                            <small class="text-muted">Description: {{ product.description }}</small>
+                        </p>
+                        <small class="text-muted d-block">Created at:
+                            {{ product.created_at|date:"M d, Y H:i" }}</small>
+                        <small class="text-muted d-block">Updated at:
+                            {{ product.updated_at|date:"M d, Y H:i" }}</small>
+                    </div>
+
+                    <div class="dropdown">
+                        <i class="fa-solid fa-ellipsis-vertical" type="button" id="dropdownMenuButton{{ product.id }}"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </i>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ product.id }}">
+                            <li><a class="dropdown-item" href="{% url 'edit_product' product.id %}">Edit</a></li>
+                            <li>
+                                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal" data-product-id="{{ product.id }}"
+                                    data-product-name="{{ product.name }}"
+                                    data-url-name="{% url 'delete_product' product.id %}">
+                                    Delete
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="col-12">
+    <div class="alert alert-info text-center">No Products found.</div>
+</div>
+{% endif %}

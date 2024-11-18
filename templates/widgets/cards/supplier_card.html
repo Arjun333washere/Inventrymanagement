@@ -1,0 +1,47 @@
+{% if suppliers %}
+<div class="row">
+    {% for supplier in suppliers %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card border-dark h-100 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div class="supplier-details">
+                        <h5 class="card-title mb-1">{{ supplier.name }}</h5>
+
+                        {% comment %} <small class="text-muted d-block mb-2">Price: ${{ supplier.price }}</small> {% endcomment %}
+                        <p class="mb-1">
+                            <small class="text-muted">Contact Information : {{ supplier.contact_info }}</small>
+                        </p>
+                        <small class="text-muted d-block">Created at:
+                            {{ supplier.created_at|date:"M d, Y H:i" }}</small>
+                        <small class="text-muted d-block">Updated at:
+                            {{ supplier.updated_at|date:"M d, Y H:i" }}</small>
+                    </div>
+
+                    <div class="dropdown">
+                        <i class="fa-solid fa-ellipsis-vertical" type="button" id="dropdownMenuButton{{ supplier.id }}"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </i>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ supplier.id }}">
+                            <li><a class="dropdown-item" href="{% url 'edit_supplier' supplier.id %}">Edit</a></li>
+                            <li>
+                                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal" data-supplier-id="{{ supplier.id }}"
+                                    data-supplier-name="{{ supplier.name }}"
+                                    data-url-name="{% url 'delete_supplier' supplier.id %}">
+                                    Delete
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="col-12">
+    <div class="alert alert-info text-center">No Supplier found.</div>
+</div>
+{% endif %}
